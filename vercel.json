@@ -21,10 +21,14 @@
     {
       "src": "/locales/(.*)",
       "dest": "/backend/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ],
   "env": {
-    "TUDUDA_INTERNAL_SSL_ENABLED": "true",
+    "TUDUDI_INTERNAL_SSL_ENABLED": "true",
     "NODE_ENV": "production"
   }
 }
