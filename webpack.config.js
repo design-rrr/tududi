@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = {
@@ -44,12 +43,10 @@ module.exports = {
       if (!devServer) {
         throw new Error('webpack-dev-server is not defined');
       }
-
       devServer.app.get('/locales/*', (req, res, next) => {
         console.log('Translation file requested:', req.path);
         next();
       });
-
       return middlewares;
     },
   },
@@ -61,6 +58,13 @@ module.exports = {
       filename: 'index.html',
       template: 'public/index.html'
     }),
+    // Add environment variables for production
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+      'process.env.API_BASE_URL': JSON.stringify(
+        isDevelopment ? 'http://localhost:3002' : ''
+      )
+    })
   ].filter(Boolean),
   module: {
     rules: [
