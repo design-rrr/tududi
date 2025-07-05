@@ -9,7 +9,7 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "dist"
       }
     }
   ],
@@ -19,8 +19,16 @@
       "dest": "/backend/server.js"
     },
     {
+      "src": "/locales/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ]
+  ],
+  "env": {
+    "TUDUDI_INTERNAL_SSL_ENABLED": "true",
+    "NODE_ENV": "production"
+  }
 }
